@@ -3,12 +3,9 @@ const app = express(); //inicializa o express
 
 const port = 3000;
 const filmesRouter = require("./routes/filmesRouter");
-const usuariosRouter = require("./routes/usuariosRouter");
-const avaliacoesRouter = require("./routes/avaliacoesRouter");
 
-app.use('/', usuariosRouter);
 app.use('/', filmesRouter);
-app.use('/', avaliacoesRouter);
+
 
 app.get("/", (req, res) => {
     res.send("Deu bom :) !");
