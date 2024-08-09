@@ -41,4 +41,24 @@ router.post('/', (req, res) => {
     });           
 });
 
+router.delete('/', (req, res) => {
+    const {id} = req.body;
+    const query = `delete  from usuarios  where id = ?;`;
+    dbConecta.query(query, [id], (err, results) => {
+        if(err) throw err;
+        res.status(200).json({
+            mensagem:'Usuario excluido com sucesso!'
+        });
+    });
+});
+router.delete('/', (req, res) => {
+    const {username} = req.body;
+    const query = `delete  from usuarios  where username = ?;`;
+    dbConecta.query(query, [username], (err, results) => {
+        if(err) throw err;
+        res.status(200).json({
+            mensagem:'Username excluido com sucesso!'
+        });
+    });
+});
 module.exports = router

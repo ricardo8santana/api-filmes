@@ -29,4 +29,15 @@ router.post("/", (req, res ) => {
         });
     }); 
 });
+
+router.delete("/", (req, res) => {
+   const {id} = req.body;
+    const query = `delete  from comentarios where  id = ?`;
+    dbConecta.query(query, [id], (err, results) => {
+        if(err) throw err;
+        res.status(200).json({
+            mensagem:'Comentario excluida!'
+    });
+ });
+});
 module.exports = router;

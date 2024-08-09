@@ -19,4 +19,26 @@ router.get("/:id", (req, res) => {
         res.json(results);
     });
 });
+
+router.delete("/", (req, res) => {
+    const {id} = req.body;
+    const query = `select * from filmes where id = ?`;
+    dbConecta.query(query, [id], (err, result) => {
+        if(err) throw err;
+        res.status(200).json({
+            mensagem:'Id excluido com sucesso!'
+        });
+    });
+});
+
+router.delete("/", (req, res) => {
+    const {tmdb_id} = req.body;
+    const query = `select * from filmes where tmdb_id = ?`;
+    dbConecta.query(query, [tmdb_id], (err, result) => {
+        if(err) throw err;
+        res.status(200).json({
+            mensagem:'TMDB_id excluido com sucesso!'
+        });
+    });
+});
 module.exports = router
