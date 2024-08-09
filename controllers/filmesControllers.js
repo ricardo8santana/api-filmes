@@ -1,4 +1,3 @@
-
 const dbConecta = require('../models/dbConnection');
 const express = require('express');
 const router = express.Router();
@@ -20,5 +19,4 @@ router.get("/:id", (req, res) => {
         res.json(results);
     });
 });
-
 module.exports = router

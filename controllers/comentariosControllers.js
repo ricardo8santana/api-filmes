@@ -18,4 +18,15 @@ router.get('/', (req, res) => {
         res.json(results);
     });
 });
+router.post("/", (req, res ) => {
+    const {filme_id, usuario_id, comentario} = req.body;
+    const query = `insert into comentarios (filme_id, usuario_id, comentario) values(?, ?, ?)`;
+    dbConecta.query(query,[filme_id, usuario_id, comentario], (err) => {
+        if(err) throw err;
+        res.status(201).json({
+            mensagem: 'Comentario Criado',
+            body: req.body
+        });
+    }); 
+});
 module.exports = router;

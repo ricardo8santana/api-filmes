@@ -30,7 +30,7 @@ router.get("/email/:email", (req, res) => {
 
 router.post('/', (req, res) => {
     const {username, email, senha} = req.body;
-    const query = `insert into usuarios (username, email, senha)  values (?, ?, md5(?));`
+    const query = `insert into usuarios (username, email, senha)  values (?, ?, md5(?))`;
 
     dbConecta.query(query,[username, email, senha], (err) => {
         if(err) throw err;
