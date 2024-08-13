@@ -36,7 +36,7 @@ router.delete("/", (req, res) => {
     dbConecta.query(query, [id], (err, results) => {
         if(err) throw err;
         res.status(200).json({
-            mensagem:'Comentario excluida!'
+            mensagem:'Comentario excluida!',
     });
  });
 });

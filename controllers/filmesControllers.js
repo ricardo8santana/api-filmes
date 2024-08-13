@@ -23,10 +23,11 @@ router.get("/:id", (req, res) => {
 router.delete("/id", (req, res) => {
     const {id} = req.body;
     const query = `delete from filmes where id = ?`;
-    dbConecta.query(query, [id], (err, result) => {
+    dbConecta.query(query, [id], (err) => {
         if(err) throw err;
-        res.status(200).json({
-            mensagem:'Id excluido com sucesso!'
+        res.json({
+            mensagem:'Filme excluido com sucesso!',
+            body: req.body
         });
     });
 });
@@ -34,10 +35,11 @@ router.delete("/id", (req, res) => {
 router.delete("/tmdb", (req, res) => {
     const {tmdb_id} = req.body;
     const query = `delete from filmes where tmdb_id = ?`;
-    dbConecta.query(query, [tmdb_id], (err, result) => {
+    dbConecta.query(query, [tmdb_id], (err) => {
         if(err) throw err;
-        res.status(200).json({
-            mensagem:'TMDB_id excluido com sucesso!'
+        res.json({
+            mensagem:'Filme excluido com sucesso!',
+            body: req.body
         });
     });
 });
