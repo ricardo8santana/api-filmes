@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const dbConecta = require('../models/dbConnection');
 const express = require('express');
 const router = express.Router();
@@ -31,7 +32,21 @@ router.delete("/", (req, res) => {
     dbConecta.query(query, [id], (err, results) => {
         if(err) throw err;
         res.status(200).json({
-            mensagem:'Avaliação excluida com sucesso !'
+            mensagem:'Avaliação excluida com sucesso !',
+            body: req.body
+        });
+    });
+});
+
+router.put("/", (req, res) => {
+    const {nota, usuario_id, filme_id} = req.body;
+    const query = 'update avaliacoes set nota = ?, criado_em =  CURRENT_TIMESTAMP() where usuario_id = ? and filme_id =  ?' ;
+
+    dbConecta.query(query, [nota, usuario_id, filme_id], (err) => {
+        if (err) throw err;
+        res.json({
+            mensagem: "Avaliação atualizada com sucesso!",
+            body: req.body
         });
     });
 });

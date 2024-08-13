@@ -38,6 +38,43 @@ router.delete("/", (req, res) => {
         res.status(200).json({
             mensagem:'Comentario excluida!',
     });
- });
+  });
 });
+
+// router.patch("/", (req, res) => {
+//     const {usuario_id, filme_id, comentario } = req.body;
+//     const query = `update comentario  =  ?, where  usuario_id =  ? and filme_id = ?`;
+//     dbConecta.query(query, [usuario_id, filme_id, comentario], (err) => {
+//         if (err) throw err;
+//         res.json({
+//             mensagem: "Comentario atualizado com sucesso!",
+//             body: req.body
+//         });
+//     });
+// });
+
+router.patch("/", (req, res) => {
+    const { usuario_id, filme_id, comentario } = req.body;
+
+    // Corrigido a consulta SQL
+    const query = `
+        UPDATE comentario
+        SET comentario = ?
+        WHERE usuario_id = ? AND filme_id = ?
+    `;
+
+    // Passa os parâmetros na ordem correta
+    dbConecta.query(query, [comentario, usuario_id, filme_id], (err) => {
+        if (err) {
+            console.error(err); // Adiciona logging para melhor depuração
+            return res.status(500).json({ mensagem: "Erro ao atualizar o comentário" });
+        }
+
+        res.json({
+            mensagem: "Comentário atualizado com sucesso!",
+            body: req.body
+        });
+    });
+});
+
 module.exports = router;
