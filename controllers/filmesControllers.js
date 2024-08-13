@@ -20,9 +20,9 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.delete("/", (req, res) => {
+router.delete("/id", (req, res) => {
     const {id} = req.body;
-    const query = `select * from filmes where id = ?`;
+    const query = `delete from filmes where id = ?`;
     dbConecta.query(query, [id], (err, result) => {
         if(err) throw err;
         res.status(200).json({
@@ -31,9 +31,9 @@ router.delete("/", (req, res) => {
     });
 });
 
-router.delete("/", (req, res) => {
+router.delete("/tmdb", (req, res) => {
     const {tmdb_id} = req.body;
-    const query = `select * from filmes where tmdb_id = ?`;
+    const query = `delete from filmes where tmdb_id = ?`;
     dbConecta.query(query, [tmdb_id], (err, result) => {
         if(err) throw err;
         res.status(200).json({
